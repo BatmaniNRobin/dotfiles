@@ -1,0 +1,38 @@
+# Brewfile — install everything with: brew bundle
+# Run from your dotfiles directory, or pass --file path.
+
+# ── Taps ──────────────────────────────────────────────────────────────────────
+tap "homebrew/bundle"
+tap "homebrew/cask-fonts"         # Nerd Fonts for terminal icons
+
+# ── Core CLI tools ────────────────────────────────────────────────────────────
+brew "git"
+brew "curl"
+brew "wget"
+brew "jq"                         # JSON processor
+brew "ripgrep"                    # Fast grep (rg)
+brew "fd"                         # Fast find alternative
+brew "bat"                        # cat with syntax highlighting
+brew "eza"                        # Modern ls replacement
+brew "fzf"                        # Fuzzy finder
+brew "zsh"                        # Latest zsh (macOS ships an older one)
+brew "zsh-completions"
+brew "tmux"                       # Terminal multiplexer
+brew "starship"                   # Cross-shell prompt
+
+# ── Development ───────────────────────────────────────────────────────────────
+brew "nvm"                        # Node version manager
+brew "pyenv"                      # Python version manager
+brew "gh"                         # GitHub CLI
+
+# ── Apps (Casks) ──────────────────────────────────────────────────────────────
+cask "visual-studio-code"
+cask "iterm2"
+cask "rectangle"                  # Window management
+
+# ── Fonts ─────────────────────────────────────────────────────────────────────
+cask "font-jetbrains-mono-nerd-font"   # Great for terminal + VS Code
+
+# ── Mac App Store (optional — requires `brew install mas` first) ──────────────
+# brew "mas"
+# mas "Xcode", id: 497799835

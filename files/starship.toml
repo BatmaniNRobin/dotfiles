@@ -1,0 +1,62 @@
+# starship.toml
+# Docs: https://starship.rs/config/
+
+# Wait this many ms for slow commands before showing a warning indicator
+command_timeout = 1000
+
+# Top-level format: order of prompt segments
+format = """
+$username\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$nodejs\
+$python\
+$rust\
+$cmd_duration\
+$line_break\
+$character"""
+
+# ── Directory ─────────────────────────────────────────────────────────────────
+[directory]
+truncation_length = 3
+truncate_to_repo  = true
+style             = "bold cyan"
+
+# ── Git ───────────────────────────────────────────────────────────────────────
+[git_branch]
+symbol = " "
+style  = "bold purple"
+
+[git_status]
+ahead  = "⇡${count}"
+behind = "⇣${count}"
+staged    = "[+${count}](green)"
+modified  = "[!${count}](yellow)"
+untracked = "[?${count}](red)"
+deleted   = "[-${count}](red)"
+
+# ── Languages (only shown when relevant files are present) ────────────────────
+[nodejs]
+symbol = " "
+style  = "bold green"
+
+[python]
+symbol         = " "
+style          = "bold yellow"
+pyenv_version_name = true
+
+[rust]
+symbol = " "
+style  = "bold red"
+
+# ── Command duration (shown when a command takes > 2s) ────────────────────────
+[cmd_duration]
+min_time = 2000
+format   = "took [$duration](bold yellow) "
+
+# ── Prompt character ──────────────────────────────────────────────────────────
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol   = "[❯](bold red)"
