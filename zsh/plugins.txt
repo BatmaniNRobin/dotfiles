@@ -1,0 +1,11 @@
+kubectl
+jsontools
+web-search
+podman
+docker
+zsh-syntax-highlighting
+zsh-autosuggestions
+zsh-interactive-cd
+zsh-navigation-tools
+git
+git-extras
