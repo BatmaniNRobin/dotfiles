@@ -105,7 +105,23 @@ else
   echo "==> Skipping VS Code extensions (code CLI not found — VS Code may need to be opened once first)"
 fi
 
-# ── 9. Rectangle preferences ─────────────────────────────────────────────────
+# ── 9. fzf keybindings & completions ─────────────────────────────────────────
+if command -v fzf &>/dev/null; then
+  echo "==> Setting up fzf keybindings..."
+  "$(brew --prefix fzf)/install" --key-bindings --completion --no-update-rc --no-bash --no-fish
+fi
+
+# ── 10. Conda (miniconda) init ────────────────────────────────────────────────
+CONDA_BIN="$HOME/miniconda3/bin/conda"
+if [[ -f "$CONDA_BIN" ]]; then
+  echo "==> Initialising conda for zsh..."
+  "$CONDA_BIN" init zsh
+  "$CONDA_BIN" config --set auto_activate_base false
+else
+  echo "==> Skipping conda init (miniconda3 not found — may need a shell restart after brew bundle)"
+fi
+
+# ── 11. Rectangle preferences ─────────────────────────────────────────────────
 echo "==> Configuring Rectangle..."
 # Gap between windows (pixels)
 defaults write com.knollsoft.Rectangle gapSize -float 10
@@ -118,7 +134,7 @@ defaults write com.knollsoft.Rectangle screenEdgeGapRight  -float 5
 # Nudge Rectangle to re-read its prefs if it's already running
 killall Rectangle &>/dev/null || true
 
-# ── 10. macOS defaults (optional tweaks) ──────────────────────────────────────
+# ── 12. macOS defaults (optional tweaks) ──────────────────────────────────────
 echo "==> Applying macOS defaults..."
 
 # Show hidden files in Finder

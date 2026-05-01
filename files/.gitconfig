@@ -1,0 +1,57 @@
+[user]
+  name  = Mani Malik
+  email = imalik@gmail.com
+
+[core]
+  editor     = code --wait
+  autocrlf   = input
+  excludesfile = ~/.gitignore_global
+  pager      = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate    = true        # n/N to jump between diff sections
+  side-by-side = false      # set true if you prefer split view
+  line-numbers = true
+  syntax-theme = Monokai Extended
+
+[init]
+  defaultBranch = main
+
+[pull]
+  rebase = false              # merge by default; change to true if you prefer rebase
+
+[push]
+  autoSetupRemote = true      # git push without setting upstream first
+
+[fetch]
+  prune = true                # auto-remove remote-tracking branches that are gone
+
+[diff]
+  tool = vscode
+
+[difftool "vscode"]
+  cmd = code --wait --diff $LOCAL $REMOTE
+
+[merge]
+  tool = vscode
+  conflictstyle = diff3
+
+[mergetool "vscode"]
+  cmd = code --wait $MERGED
+
+[alias]
+  st      = status -sb
+  co      = checkout
+  br      = branch -vv
+  lg      = log --oneline --graph --decorate --all
+  undo    = reset HEAD~1 --mixed        # undo last commit, keep changes staged
+  fixup   = commit --amend --no-edit    # fold staged changes into last commit
+  wip     = !git add -A && git commit -m 'WIP'
+  unwip   = reset HEAD~1 --mixed
+  aliases = config --get-regexp alias
+
+[color]
+  ui = auto
