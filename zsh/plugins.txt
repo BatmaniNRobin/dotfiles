@@ -9,3 +9,7 @@ zsh-interactive-cd
 zsh-navigation-tools
 git
 git-extras
+colorize
+thefuck
+tailscale
+istioctl
