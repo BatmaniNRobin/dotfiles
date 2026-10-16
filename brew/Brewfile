@@ -2,12 +2,10 @@
 # Run from your dotfiles directory, or pass --file path.
 
 # ── Taps ──────────────────────────────────────────────────────────────────────
-tap "homebrew/bundle"
-tap "fluxcd/tap"
-tap "hashicorp/tap"
-tap "homebrew/cask-fonts"         # Nerd Fonts for terminal icons
+tap "fluxcd/tap", trusted: true
+tap "hashicorp/tap", trusted: true
 tap "rhettbull/osxphotos", "https://github.com/RhetTbull/homebrew-osxphotos"
-tap "sgrastar24/tap", trusted: true
+# tap "sgrastar24/tap", trusted: true # does not work on arm64
 
 # ── Core CLI tools ────────────────────────────────────────────────────────────
 brew "git"
@@ -37,7 +35,7 @@ brew "ansible"
 brew "skopeo"
 brew "terraform"
 brew "zsh"                        # macos ships with an old version of zsh, install the latest
-brew "neofetch"
+brew "fastfetch"
 brew "tmux"                       # Terminal multiplexer
 brew "starship"                   # Cross-shell prompt
 brew "zoxide"                     # Smarter cd (replaces z plugin)
@@ -59,7 +57,7 @@ brew "imagemagick"
 # brew "jpeg-xl"
 # brew "node"
 # brew "jupyterlab"
-brew "kubectl"
+# brew "kubectl" # installed via zsh plugin
 # Duplicate file finder and an enhanced fork of 'fdupes'
 brew "jdupes"
 # Export photos from Apple Photos app and query the Photos database
@@ -143,7 +141,7 @@ vscode "xshrim.txt-syntax"
 vscode "yzhang.markdown-all-in-one"
 vscode "zhuangtongfa.material-theme"
 vscode "skellock.just"
-cargo "avm"
+cargo "avm" # failed to compile - needs rust 1.65
 npm "expo-cli"
 npm "mocha"
 npm "yarn"
