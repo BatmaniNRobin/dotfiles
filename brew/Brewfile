@@ -2,13 +2,12 @@
 # Run from your dotfiles directory, or pass --file path.
 
 # ── Taps ──────────────────────────────────────────────────────────────────────
-# tap "dart-lang/dart"
 tap "homebrew/bundle"
-# tap "sgrastar24/tap"
-tap "watr/formulae"
 tap "fluxcd/tap"
 tap "hashicorp/tap"
 tap "homebrew/cask-fonts"         # Nerd Fonts for terminal icons
+tap "rhettbull/osxphotos", "https://github.com/RhetTbull/homebrew-osxphotos"
+tap "sgrastar24/tap", trusted: true
 
 # ── Core CLI tools ────────────────────────────────────────────────────────────
 brew "git"
@@ -49,27 +48,30 @@ brew "btop"                       # Resource monitor (better htop)
 
 brew "aom"
 # brew "apache-spark"
-# brew "webp"
+brew "webp"
 # brew "groff"
 # brew "ghostscript"
 # brew "gradle"
-# brew "libheif"
-# brew "imagemagick"
+brew "libheif"
+brew "imagemagick"
 # brew "inetutils"
 # brew "ipython"
 # brew "jpeg-xl"
 # brew "node"
 # brew "jupyterlab"
-# brew "kubectl"
+brew "kubectl"
+# Duplicate file finder and an enhanced fork of 'fdupes'
+brew "jdupes"
+# Export photos from Apple Photos app and query the Photos database
+brew "rhettbull/osxphotos/osxphotos", trusted: true
 
 # ── Development ───────────────────────────────────────────────────────────────
 brew "cosign"
-brew "python@3.9"
-brew "node@22"
+# brew "python@3.11"
+# brew "node@23"
 brew "pnpm"
-brew "python@3.10"
+brew "python@3.11"
 brew "vercel-cli"
-brew "watr/formulae/mbeacon"
 brew "fluxcd/tap/flux"
 brew "hashicorp/tap/terraform"
 brew "hashicorp/tap/vault"
@@ -86,6 +88,10 @@ cask "basictex"
 cask "obs"
 cask "spotify"
 cask "vial"
+# Web browser
+cask "firefox"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
 
 # ── Fonts ─────────────────────────────────────────────────────────────────────
 cask "font-jetbrains-mono-nerd-font"   # Great for terminal + VS Code
@@ -138,3 +144,6 @@ vscode "yzhang.markdown-all-in-one"
 vscode "zhuangtongfa.material-theme"
 vscode "skellock.just"
 cargo "avm"
+npm "expo-cli"
+npm "mocha"
+npm "yarn"

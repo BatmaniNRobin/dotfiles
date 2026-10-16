@@ -1,62 +1,125 @@
 # starship.toml
+# Styled to match Spaceship prompt's color palette and two-line layout.
 # Docs: https://starship.rs/config/
 
-# Wait this many ms for slow commands before showing a warning indicator
 command_timeout = 1000
 
-# Top-level format: order of prompt segments
+# ── Two-line layout ───────────────────────────────────────────────────────────
+# Line 1: user@host  directory  git  env versions  cmd duration
+# Line 2: ➜ (prompt character)
 format = """
 $username\
+$hostname\
 $directory\
 $git_branch\
-$git_state\
 $git_status\
+$git_state\
 $nodejs\
 $python\
+$conda\
 $rust\
+$golang\
 $cmd_duration\
 $line_break\
 $character"""
 
+# ── User & host (only shown over SSH) ─────────────────────────────────────────
+[username]
+show_always = false
+style_user  = "bold white"
+style_root  = "bold red"
+format      = "[$user]($style) "
+
+[hostname]
+ssh_only = true
+style    = "bold dimmed white"
+format   = "at [$hostname]($style) "
+
 # ── Directory ─────────────────────────────────────────────────────────────────
+# Spaceship: white, shows last 3 segments, bold
 [directory]
-truncation_length = 3
-truncate_to_repo  = true
-style             = "bold cyan"
+truncation_length   = 3
+truncate_to_repo    = true
+style               = "bold white"
+truncation_symbol   = "…/"
+read_only           = " 󰌾"
+read_only_style     = "red"
+format              = "in [$path]($style)[$read_only]($read_only_style) "
 
-# ── Git ───────────────────────────────────────────────────────────────────────
+# ── Git branch ────────────────────────────────────────────────────────────────
+# Spaceship: yellow branch name, git icon
 [git_branch]
-symbol = " "
-style  = "bold purple"
+symbol   = " "
+style    = "bold yellow"
+format   = "on [$symbol$branch]($style) "
 
+# ── Git status ────────────────────────────────────────────────────────────────
+# Spaceship uses red for dirty indicators, green for clean
 [git_status]
-ahead  = "⇡${count}"
-behind = "⇣${count}"
-staged    = "[+${count}](green)"
-modified  = "[!${count}](yellow)"
-untracked = "[?${count}](red)"
-deleted   = "[-${count}](red)"
+format      = "([$all_status$ahead_behind]($style) )"
+style       = "bold red"
+conflicted  = "="
+ahead       = "⇡${count}"
+behind      = "⇣${count}"
+diverged    = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked   = "?${count}"
+stashed     = "*${count}"
+modified    = "!${count}"
+staged      = "+${count}"
+renamed     = "»${count}"
+deleted     = "✘${count}"
+up_to_date  = "[✔](bold green)"
 
-# ── Languages (only shown when relevant files are present) ────────────────────
+# ── Git state (rebasing, merging, etc.) ───────────────────────────────────────
+[git_state]
+style  = "bold yellow"
+format = "[$state( $progress_current/$progress_total)]($style) "
+
+# ── Node.js ───────────────────────────────────────────────────────────────────
+# Spaceship: cyan, only shown when relevant
 [nodejs]
 symbol = " "
-style  = "bold green"
+style  = "bold cyan"
+format = "via [$symbol$version]($style) "
 
+# ── Python ────────────────────────────────────────────────────────────────────
+# Spaceship: yellow, shows version + virtualenv name
 [python]
-symbol         = " "
-style          = "bold yellow"
-pyenv_version_name = true
+symbol              = " "
+style               = "bold yellow"
+pyenv_version_name  = true
+format              = "via [$symbol$version( \\($virtualenv\\))]($style) "
 
+# ── Conda ─────────────────────────────────────────────────────────────────────
+[conda]
+symbol      = " "
+style       = "bold green"
+format      = "via [$symbol$environment]($style) "
+ignore_base = true
+
+# ── Rust ──────────────────────────────────────────────────────────────────────
 [rust]
 symbol = " "
 style  = "bold red"
+format = "via [$symbol$version]($style) "
 
-# ── Command duration (shown when a command takes > 2s) ────────────────────────
+# ── Go ────────────────────────────────────────────────────────────────────────
+[golang]
+symbol = " "
+style  = "bold cyan"
+format = "via [$symbol$version]($style) "
+
+# ── Command duration ──────────────────────────────────────────────────────────
+# Spaceship: yellow, shown after 2s
 [cmd_duration]
-min_time = 2000
-format   = "took [$duration](bold yellow) "
+min_time          = 2000
+style             = "bold yellow"
+format            = "took [$duration]($style) "
+show_milliseconds = false
 
 # ── Prompt character ──────────────────────────────────────────────────────────
+# Spaceship uses ➜ in green (success) or red (error)
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol   = "[❯](bold red)"
+success_symbol = "[➜](bold green)"
+error_symbol   = "[➜](bold red)"
+vimcmd_symbol  = "[←](bold green)"
